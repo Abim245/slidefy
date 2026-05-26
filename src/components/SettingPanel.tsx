@@ -1,27 +1,34 @@
+import {useState } from 'react';
 function SettingPanel(){
+    const [newLength, setNewLength] = useState("");
+    const [newStyle, setNewStyle] = useState("");
+    const [newAudience, setNewAudience] = useState("");
     return (
         <div>
-            <select name="Length" id="">
-                <h2>Length</h2>
-                <option value="">short(5-8 slides)</option>
-                <option value="">medium(8-15 slides)</option>
-                <option value="">long(20+ slides)
-                </option>
+            <h2>Length</h2>
+            <select name="Length" id=""  value = {newLength}
+                    onChange = {(e) =>{setNewLength(e.target.value)}}>
+                <option value="short">short(5-8 slides)</option>
+                <option value="medium">medium(8-15 slides)</option>
+                <option value="long">long(20+ slides)</option>
             </select>
-            <select name="style" id="">
-                <h2>Style</h2>
-                <option value="">simple</option>
-                <option value="">minimal</option>
-                <option value="">professional</option>
-                <option value="">creative</option>
+             <h2
+            >Style</h2>
+            <select name="style" id=""   value = {newStyle}
+            onChange = {(e) =>{setNewStyle(e.target.value)}}>
+                <option value="simple">simple</option>
+                <option value="minimal">minimal</option>
+                <option value="professional">professional</option>
+                <option value="creative">creative</option>
             </select>
-            <select name="Audience" id="">
-                <h2>Audience</h2>
-                <option value="">student</option>
-                <option value="">marketers</option>
-                <option value="">developers</option>
-                <option value="">general</option>
-                <option value="">executives</option>
+            <h2 >Audience</h2>
+            <select name="Audience" id=""  value = {newAudience}
+                    onChange = {(e) =>{setNewAudience(e.target.value)}}>
+                <option value="student">student</option>
+                <option value="marketers">marketers</option>
+                <option value="developers">developers</option>
+                <option value="general">general</option>
+                <option value="executives">executives</option>
             </select>
         </div>
     )

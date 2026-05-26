@@ -7,5 +7,11 @@ const manifestConfig = manifest as unknown as ManifestV3Export
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), crx({ manifest: manifestConfig })]
+  plugins: [react(), crx({ manifest: manifestConfig })],
+  build: {
+    sourcemap: false
+},
+optimizeDeps: {
+    force: true
+}
 })

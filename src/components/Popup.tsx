@@ -7,7 +7,7 @@ function Popup (){
     const [status, setStatus] = useState("idle");
     return (
         <div>
-            <img src="" alt="logo" />
+            <img src="{null}" alt="logo" />
             <StatusIndicator status={status} />
             <SettingPanel />
             <GenerateButton/>
