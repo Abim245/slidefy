@@ -1,12 +1,13 @@
 import { useState } from "react"
 
-function GenerateButton(){
+
+function GenerateButton({ onClick }: { onClick: () => void }){
     const [isLoading , setIsLoading] = useState(false);
     return (
         <div>
-            
             <button
-            onClick = {() => setIsLoading(true)} disabled={isLoading}> {isLoading ? "Generating" : "Generate"} </button>
-            </div>)};
+            onClick = {() =>{ setIsLoading(true); onClick()} } disabled={isLoading}> {isLoading ? "Generating" : "Generate"} </button>
+            </div>)
+        }
 
 export default GenerateButton;

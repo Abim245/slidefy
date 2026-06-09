@@ -31,8 +31,10 @@ styles.forEach(el => el.remove())
 
 
 const extractedText = contentArea.innerText.trim()
+if (extractedText) {
+    chrome.runtime.sendMessage({ type: "TEXT_EXTRACTED", text: extractedText })
+}
 
-console.log(extractedText)
     console.log("content area found")
 } else {
     console.log("no content found")

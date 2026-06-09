@@ -9,7 +9,11 @@ const manifestConfig = manifest as unknown as ManifestV3Export
 export default defineConfig({
   plugins: [react(), crx({ manifest: manifestConfig })],
   build: {
-    sourcemap: false
+    sourcemap: false,
+    target: 'chrome89',
+    rollupOptions: {
+      input: {"content": "src/content"}
+    }
 },
 optimizeDeps: {
     force: true

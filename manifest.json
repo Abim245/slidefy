@@ -1,14 +1,20 @@
 { "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
     },
-  "manifest_version": 3,
+    "manifest_version": 3,
   "name": "slidefy",
   "version": "1.0.0",
+  "permissions" : [ "activeTab", "scripting", "storage", "downloads"],
   "action": {
     "default_popup": "index.html"
   },
    "content_scripts":[
     {"matches": ["<all_urls>"],
     "js" : ["src/content.js"]}
-   ]
+   ],
+   "background": {
+    "service_worker":"src/background.js"
+   }
+
+   
 }
