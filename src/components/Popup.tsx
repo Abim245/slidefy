@@ -36,19 +36,19 @@ function extractContent() {
         styles.forEach(el => el.remove())
 
 
-        const extractedText = contentArea.innerText.trim()
-        if (extractedText) {
+const extractedText = (contentArea as HTMLElement).innerText.trim()       
+ if (extractedText) {
         return extractedText
         } else{
             return "No content found"
-        }
-    }
-
+           }   }
 }
 function HandleGenerate(){
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const tabId = tabs[0].id
+        if (tabId === undefined) return
     chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
+       target: { tabId: tabId },
         func: extractContent,
     })
     .then((results) => { console.log(results[0].result) })
