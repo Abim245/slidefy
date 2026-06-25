@@ -5,6 +5,7 @@
   "name": "slidefy",
   "version": "1.0.0",
   "permissions" : [ "activeTab", "scripting", "storage", "downloads"],
+  "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "index.html"
   },

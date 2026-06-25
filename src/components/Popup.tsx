@@ -51,8 +51,11 @@ function HandleGenerate(){
        target: { tabId: tabId },
         func: extractContent,
     })
-    .then((results) => { console.log(results[0].result) })
-  })
+    .then((results) => {
+    console.log("got results:", results)
+    chrome.runtime.sendMessage({type: "GENERATE_SLIDES" , text: results[0].result})
+
+}) })
 }
 function Popup (){
     const [status, _setStatus] = useState("idle");
