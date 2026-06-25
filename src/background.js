@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         },
    body: JSON.stringify({
     model: "llama-3.3-70b-versatile",
-    messages: [{ role: "user", content: message.text }]
+   messages: [{ role: "user", content: `You are a presentation generator. Based on the following content, create slides. Respond only with valid JSON, structured as an array of objects, each with a title and an array of bullet points. Content: ${message.text}` }]
     })
       
 }).then(response => response.json())
