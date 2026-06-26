@@ -1,7 +1,8 @@
 import GenerateButton from "./GenerateButton";
 import SettingPanel from "./SettingPanel";
 import StatusIndicator from "./StatusIndicator";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import pptxgen from "pptxgenjs";
 
 function extractContent() {
 
@@ -57,9 +58,31 @@ function HandleGenerate(){
 
 }) })
 }
+function generatePresentation(slides:Slide[]) {
+    const pres = new pptxgen()
+    slides.forEach((slideData: Slide) => {
+        const slide = pres.addSlide()
+        slide.addText(slideData.title, { x: 0.5, y: 0.5, fontSize: 28, bold: true })
+        slide.addText(slideData.bulletPoints.join("\n"), { x: 0.5, y: 1.5, fontSize: 16 })
+    })
+    pres.writeFile({ fileName: "deckify-output.pptx" })
+}
+type Slide = {
+    title: string
+    bulletPoints: string[]
+}
 function Popup (){
     const [status, _setStatus] = useState("idle");
-    return (
+    const [_slides, setSlides] = useState([])
+    useEffect(() => {
+    chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
+        if (message.type === "SLIDES_READY") {
+            setSlides(message.slides)
+            generatePresentation(message.slides)
+        }
+    })
+    }, [])
+ return (
         <div>
             <StatusIndicator status={status} />
             <SettingPanel />
