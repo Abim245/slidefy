@@ -19,6 +19,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const cleanContent = rawContent.replace(/```json/g, '').replace(/```/g, '').trim()
     const slides = JSON.parse(cleanContent)
     chrome.runtime.sendMessage({ type: "SLIDES_READY", slides: slides })
+    console.log("sending GENERATE_SLIDES, click count check")
     }) 
 }  
 })

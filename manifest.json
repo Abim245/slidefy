@@ -4,7 +4,7 @@
     "manifest_version": 3,
   "name": "slidefy",
   "version": "1.0.0",
-  "permissions" : [ "activeTab", "scripting", "storage", "downloads"],
+  "permissions" : [ "activeTab", "scripting", "storage", "downloads", "clipboardRead"],
   "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "index.html"
