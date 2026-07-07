@@ -1,12 +1,14 @@
+import { useState } from "react";
 import GuestMode from "../pages/GuestMode";
 import Home from "../pages/Home";
 
-
 function Popup() {
+    const [currentPage, setCurrentPage] = useState("guest")
+
     return (
         <div>
-            <GuestMode />
-            <Home/>
+            {currentPage === "guest" && <GuestMode onAccountClick={() => setCurrentPage("home")} />}
+            {currentPage === "home" && <Home />}
         </div>
     )
 }

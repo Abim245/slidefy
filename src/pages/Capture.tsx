@@ -25,9 +25,10 @@ useEffect(() => {
 }, [])
     return(
         <div>
-            <p>selected text: </p>
-            <p>"{capturedText}"</p>                
-            <button disabled={isGenerating} 
+            
+            <p className="capture-label">selected text: </p>
+            <p className="quote-box">"{capturedText}"</p>                
+            <button disabled={isGenerating} className="btn-primary"
             onClick={() => {
              setIsGenerating(true)
             chrome.runtime.sendMessage({ type: "GENERATE_SLIDES", text: capturedText })
@@ -37,26 +38,30 @@ useEffect(() => {
                 <h2>{isGenerating ? "Generating..." : "Generate deck from this topic"}</h2>
                 <p>uses Groq AI to build slides instantly</p>
             </button>
-            <button
-            onClick={() => {
-                chrome.storage.local.get("collections", (result) => {
-                    const collections: Record<string, any> = result.collections || {}
-                    const collection = collections[selectedCollection] || { name: selectedCollection, items: [] }
-                    collection.items.push(capturedText)
-                    collections[selectedCollection] = collection
-                    chrome.storage.local.set({ collections })
-                })
-            }}
-            >
-                Add to my collection
-                <select name="" id="" value={selectedCollection} onChange={(e) => setSelectedCollection(e.target.value)}>
-                <option value="My Pitch">My pitch</option>
-                <option value="Lecture Note">Lecture Note</option>
-                <option value="startup Idea">startup Idea</option>
+             <div className="collection-row">
+                <span style={{color: "#888", fontSize: "0.85rem"}}>Add to collection:</span>
+                <select value={selectedCollection} onChange={(e) => setSelectedCollection(e.target.value)}>
+                    <option value="My Pitch">My Pitch</option>
+                    <option value="Lecture Notes">Lecture Notes</option>
+                    <option value="Startup Idea">Startup Idea</option>
                 </select>
+            </div>
+           <button
+                className="btn-secondary"
+                onClick={() => {
+                    chrome.storage.local.get("collections", (result) => {
+                        const collections: Record<string, any> = result.collections || {}
+                        const collection = collections[selectedCollection] || { name: selectedCollection, items: [] }
+                        collection.items.push(capturedText)
+                        collections[selectedCollection] = collection
+                        chrome.storage.local.set({ collections })
+                    })
+                }}
+            >
+                Add to collection
             </button>
-            <p>Edit Highlight text</p>
-            <p>Open in workspace</p>
+            
+            <p className="footer-link">Edit Highlight text</p>
         </div>
     )
 }

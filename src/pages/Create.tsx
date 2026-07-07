@@ -21,9 +21,12 @@ function Create(){
         <div>
           {process === "input" && (
     <>
-    <input type="text" value={topic} onChange={(e) => { setTopic(e.target.value) }}/>
-    <p>or</p>
-    <input type="file" name="" id="" />
+    
+    <textarea placeholder="Start with an idea or paste text..." value={topic} onChange={(e) => { setTopic(e.target.value) }} />
+    <label className="upload-zone">
+    ↑ Upload PDF / DOCX
+    <input type="file" style={{display: "none"}} />
+</label>
     <button
     onClick={() => {
     setProcess("structuring")
@@ -48,24 +51,38 @@ function Create(){
 
 {process === "designing" && (
     <>
-    <h2>Designing your slide</h2>
-    <p>{topic}</p>
-    <div>
-        <p>{progressStep >= 1 ? "✓" : "○"} Analyse raw input</p>
-        <p>{progressStep >= 2 ? "✓" : "○"} Generate slides narrative</p>
-        <p>{progressStep >= 3 ? "✓" : "○"} Applying premium layout</p>
+    <div className="processing-container">
+        
+    <h2 className="processing-title">Designing your slide</h2>
+    <p className="processing-topic">{topic}</p>
+   <div className="checklist">
+        <p><span className={progressStep >= 1 ? "check-done" : "check-pending"}>
+        {progressStep >= 1 ? "✓" : "○"}
+        </span> Analyse raw input</p>           
+         <p><span className={progressStep >= 2 ? "check-done" : "check-pending"}>
+            {progressStep >= 2 ? "✓" : "○"}
+            </span> Generate slides narrative</p>
+            <p><span className={progressStep >= 3 ? "check-done" : "check-pending"}>
+                {progressStep >= 3 ? "✓" : "○"}
+                </span> Applying premium layout</p>
+        </div>
+    <p className="powered-by">POWERED BY GROQ</p>
     </div>
-    <p>POWERED BY GROQ</p>
     </>
 )}
 
 {process === "ready" && (
     <>
-    <h1>Presentation Ready</h1>
-    <p>8 premium slides generated in 3.2s</p>
+    <div className="claim-container">
+        <div className="claim-checkmark">✓</div>
+        <h1 className="claim-title">Presentation Ready</h1>
+    <p className="claim-subtitle" >8 premium slides generated in 3.2s</p>
     <button>Open in workspace</button>
     <p>or open link to share</p>
+    </div>
+    
     </>
+ 
 )}
         </div>
     )

@@ -13,22 +13,27 @@ function Collectible(){
         <div>
             <input type="text" placeholder="search collections"/>
             {Object.values(collections).map((collection: any) => (
-            <div key={collection.name}>
-                <h2>{collection.name}</h2>
-                <p><span>{collection.items.length}</span> items</p>
-                <button onClick={() => {
-                    const text = collection.items.join(" ")
-                    chrome.runtime.sendMessage({ type: "GENERATE_SLIDES", text })
-                }}>Generate</button>
+        <div key={collection.name} className="collection-card">
+        <div className="collection-info">
+            <h2>{collection.name}</h2>
+            <p>{collection.items.length} items</p>
+        </div>
+        <button className="btn-primary" onClick={() => {
+            const text = collection.items.join(" ")
+            chrome.runtime.sendMessage({ type: "GENERATE_SLIDES", text })
+        }}>Generate</button>
             </div>
-         ))}
+        ))}
+        <div className="create-collection">
+            <span>+</span>
             <div>
-                <h2>create new collection</h2>
-                <p>start a fresh deck</p>
+                <p style={{color: "white"}}>Create new collection</p>
+                <p style={{fontSize: "0.8rem"}}>Start a fresh deck</p>
             </div>
-            <p>open workspace</p>
+        </div>
         </div>
     )
 }
+
 
 export default Collectible;
